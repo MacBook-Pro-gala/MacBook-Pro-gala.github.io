@@ -16,22 +16,22 @@
   <meta name="author" content="lyh">
   <meta name="keywords" content="">
   
-    <meta name="description" content="日常工作的Git流程工作流程11.git clone                &#x2F;&#x2F;到本地2.git checkout -b xxx          &#x2F;&#x2F;切换至新分支xxx（相当于复制了remote的仓库到本地的xxx分支上3.修改或者添加本地代码（部署在硬盘的源文件上）4.git diff          &#x2F;&#x2F;查看自己对代码做出">
+    <meta name="description" content="剪贴板操作剪贴板的操作经常和前面所说的拖放技术在一起使用，因此我们现在先来说说剪贴板的相关操作。大家对剪贴板都很熟悉。我们可以简单的把它理解成一个数据的存储池，可以把外面的数据放置进去，也可以把里面的数据取出来。剪贴板是由操作系统维护的，所以这提供了跨应用程序数据交互的一种方式。Qt 已经为我们封装好很多关于剪贴板的操作，因此我们可以在自己的应用中很容易的实现。下面还是从代码开始: clipboa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git实际开发场景">
-<meta property="og:url" content="https://macbook-pro-gala.github.io/2023/04/22/Git%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E5%9C%BA%E6%99%AF/index.html">
+<meta property="og:title" content="QT-剪贴板操作">
+<meta property="og:url" content="https://macbook-pro-gala.github.io/2023/04/22/QT-%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="lyh的个人博客">
-<meta property="og:description" content="日常工作的Git流程工作流程11.git clone                &#x2F;&#x2F;到本地2.git checkout -b xxx          &#x2F;&#x2F;切换至新分支xxx（相当于复制了remote的仓库到本地的xxx分支上3.修改或者添加本地代码（部署在硬盘的源文件上）4.git diff          &#x2F;&#x2F;查看自己对代码做出">
+<meta property="og:description" content="剪贴板操作剪贴板的操作经常和前面所说的拖放技术在一起使用，因此我们现在先来说说剪贴板的相关操作。大家对剪贴板都很熟悉。我们可以简单的把它理解成一个数据的存储池，可以把外面的数据放置进去，也可以把里面的数据取出来。剪贴板是由操作系统维护的，所以这提供了跨应用程序数据交互的一种方式。Qt 已经为我们封装好很多关于剪贴板的操作，因此我们可以在自己的应用中很容易的实现。下面还是从代码开始: clipboa">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-22T02:37:37.000Z">
-<meta property="article:modified_time" content="2023-04-22T02:57:05.390Z">
+<meta property="article:published_time" content="2023-04-22T06:40:19.000Z">
+<meta property="article:modified_time" content="2023-04-22T06:40:45.005Z">
 <meta property="article:author" content="lyh">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="QT CPP">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Git实际开发场景 - lyh的个人博客</title>
+  <title>QT-剪贴板操作 - lyh的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Git实际开发场景"></span>
+            <span id="subtitle" data-typed-text="QT-剪贴板操作"></span>
           
         </div>
 
@@ -208,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-22 10:37" pubdate>
-          2023年4月22日 上午
+        <time datetime="2023-04-22 14:40" pubdate>
+          2023年4月22日 下午
         </time>
       </span>
     
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          1.8k 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          16 分钟
+          15 分钟
         
       </span>
     
@@ -269,42 +269,15 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Git实际开发场景</h1>
+            <h1 style="display: none">QT-剪贴板操作</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="日常工作的Git流程"><a href="#日常工作的Git流程" class="headerlink" title="日常工作的Git流程"></a>日常工作的Git流程</h1><h2 id="工作流程1"><a href="#工作流程1" class="headerlink" title="工作流程1"></a>工作流程1</h2><p>1.git clone                &#x2F;&#x2F;到本地<br>2.git checkout -b xxx          &#x2F;&#x2F;切换至新分支xxx<br>（相当于复制了remote的仓库到本地的xxx分支上<br>3.修改或者添加本地代码（部署在硬盘的源文件上）<br>4.git diff          &#x2F;&#x2F;查看自己对代码做出的改变<br>5.git add       &#x2F;&#x2F;上传更新后的代码至暂存区<br>6.git commit -m 注释        &#x2F;&#x2F;可以将暂存区里更新后的代码更新到本地git<br>7.git push origin xxx     &#x2F;&#x2F;将本地的xxxgit分支上传至github上的git<br>-——————————————————————————————–<br>（如果在写自己的代码过程中发现远端GitHub上代码出现改变）<br>1.git checkout main        &#x2F;&#x2F;切换回main分支<br>2.git pull origin main      &#x2F;&#x2F;将远端修改过的代码再更新到本地</p>
-<p>​	(即将远程origin主机的master分支拉取过来和本地的当前分支进行合并)<br>3.git checkout xxx           &#x2F;&#x2F;回到xxx分支<br>4.git rebase main           &#x2F;&#x2F;我在xxx分支上，先把main移过来，然后根据我的commit来修改成新的内容<br>（中途可能会出现，rebase conflict —–》手动选择保留哪段代码）<br>5.git push -f origin xxx        &#x2F;&#x2F;把rebase后并且更新过的代码再push到远端github上<br>（-f —》强行）<br>6.原项目主人采用pull request 中的 squash and merge 合并所有不同的commit<br>-———————————————————————————————<br>远端完成更新后<br>1.git branch -d xxx 删除本地的git分支<br>2.git pull origin main 再把远端的最新代码拉至本地</p>
-<h2 id="工作流程2"><a href="#工作流程2" class="headerlink" title="工作流程2"></a>工作流程2</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">git rebase <br><span class="hljs-keyword">while</span>(存在冲突) &#123;<br>    git status<br>    找到当前冲突文件，编辑解决冲突<br>    git add -u<br>    git rebase --<span class="hljs-built_in">continue</span><br>    <span class="hljs-keyword">if</span>( git rebase --abort )<br>        <span class="hljs-built_in">break</span>; <br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="剪贴板操作"><a href="#剪贴板操作" class="headerlink" title="剪贴板操作"></a>剪贴板操作</h1><p>剪贴板的操作经常和前面所说的拖放技术在一起使用，因此我们现在先来说说剪贴板的相关操作。大家对剪贴板都很熟悉。我们可以简单的把它理解成一个数据的存储池，可以把外面的数据放置进去，也可以把里面的数据取出来。剪贴板是由操作系统维护的，所以这提供了跨应用程序数据交互的一种方式。Qt 已经为我们封装好很多关于剪贴板的操作，因此我们可以在自己的应用中很容易的实现。下面还是从代码开始:</p>
+<h2 id="clipboarddemo-h"><a href="#clipboarddemo-h" class="headerlink" title="clipboarddemo.h"></a>clipboarddemo.h</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> CLIPBOARDDEMO_H  </span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> CLIPBOARDDEMO_H  </span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QtGui/QWidget&gt;</span>  </span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ClipboardDemo</span> : <span class="hljs-keyword">public</span> QWidget  <br>&#123;  <br>    Q_OBJECT  <br><br><span class="hljs-keyword">public</span>:  <br>    <span class="hljs-built_in">ClipboardDemo</span>(QWidget *parent = <span class="hljs-number">0</span>);  <br><br><span class="hljs-keyword">private</span> slots:  <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setClipboard</span><span class="hljs-params">()</span></span>;  <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getClipboard</span><span class="hljs-params">()</span></span>;  <br>&#125;;  <br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// CLIPBOARDDEMO_H </span></span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull<br>编辑冲突文件<br>git add .<br>git commit -m <span class="hljs-string">&quot;feat: this is a comment&quot;</span><br>git push<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="删除其他分支"><a href="#删除其他分支" class="headerlink" title="删除其他分支"></a>删除其他分支</h2><p>这个是经常会用到的，因为本地开发多次之后，使用 <code>git branch</code> 之后会发现有很多分支还在，为了保证「干净卫生」，所以就了解一下，可以执行如下命令。</p>
-<ul>
-<li>增强命令（master）</li>
-</ul>
-<blockquote>
-<p>可以删除除开 master 以外的分支，但类似 <code>mr/master/xxx</code> 这样的带有 master 的删除不了。</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git stash &amp;&amp; git checkout master &amp;&amp; git branch | grep -v &quot;master&quot; | xargs git branch -D<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>增强命令（release）</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git stash &amp;&amp; git checkout release &amp;&amp; git branch | grep -v &quot;release&quot; | xargs git branch -D<br></code></pre></td></tr></table></figure>
-
-<p>rebase 命令很强大，<code>git rebase -i HEAD~[num]</code> 和 <code>git pull --rebase</code> 等。</p>
-<blockquote>
-<h3 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h3><p><a target="_blank" rel="noopener" href="http://jartto.wang/2018/12/11/git-rebase/">彻底搞懂 Git-Rebase</a></p>
-</blockquote>
-<ul>
-<li>git merge适合公共分支，将其他分支合并到公共分支，merge操作两个分支最新的提交点会形成新的一个提交点，使后合并进来的commit记录仍然保持在后边。（merge以后会多出无意义的一条提交记录“Merge … to …”）</li>
-<li>git rebase适合个人分支（只自己一个人提交）。日常开发过程中，个人分支代码需要和公共分支代码保持一致最新，定期合并公共分支代码到个人分支。执行rebase操作后，会从指定分支上合并别人新的commit在我们的commit之前。（缺点是rebase以后就不知道当前分支最早是从哪个分支拉出来的了，因为基底变了）</li>
-</ul>
-<h2 id="回滚操作"><a href="#回滚操作" class="headerlink" title="回滚操作"></a>回滚操作</h2><h3 id="代码-git-commit-到本地分支，但没有-git-push-到远程"><a href="#代码-git-commit-到本地分支，但没有-git-push-到远程" class="headerlink" title="代码 git commit 到本地分支，但没有 git push 到远程"></a>代码 git commit 到本地分支，但没有 git push 到远程</h3><p>git log # 得到你需要回退一次提交的commit id<br>git reset –hard <commit_id>  # 回到其中你想要的某个版本<br>git reset –hard HEAD^  # 回到最新的一次提交<br>git reset HEAD^  # 此时代码保留，回到 git add 之前</p>
+<h2 id="clipboarddemo-cpp"><a href="#clipboarddemo-cpp" class="headerlink" title="clipboarddemo.cpp"></a>clipboarddemo.cpp</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QtGui&gt;</span>  </span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;clipboarddemo.h&quot;</span>  </span><br><br>ClipboardDemo::<span class="hljs-built_in">ClipboardDemo</span>(QWidget *parent)  <br>    : <span class="hljs-built_in">QWidget</span>(parent)  <br>&#123;  <br>    QVBoxLayout *mainLayout = <span class="hljs-keyword">new</span> <span class="hljs-built_in">QVBoxLayout</span>(<span class="hljs-keyword">this</span>);  <br>    QHBoxLayout *northLayout = <span class="hljs-keyword">new</span> QHBoxLayout;  <br>    QHBoxLayout *southLayout = <span class="hljs-keyword">new</span> QHBoxLayout;  <br><br>    QTextEdit *editor = <span class="hljs-keyword">new</span> QTextEdit;  <br>    QLabel *label = <span class="hljs-keyword">new</span> QLabel;  <br>    label-&gt;<span class="hljs-built_in">setText</span>(<span class="hljs-string">&quot;Text Input: &quot;</span>);  <br>    label-&gt;<span class="hljs-built_in">setBuddy</span>(editor);  <br>    QPushButton *copyButton = <span class="hljs-keyword">new</span> QPushButton;  <br>    copyButton-&gt;<span class="hljs-built_in">setText</span>(<span class="hljs-string">&quot;Set Clipboard&quot;</span>);  <br>    QPushButton *pasteButton = <span class="hljs-keyword">new</span> QPushButton;  <br>    pasteButton-&gt;<span class="hljs-built_in">setText</span>(<span class="hljs-string">&quot;Get Clipboard&quot;</span>);  <br><br>    northLayout-&gt;<span class="hljs-built_in">addWidget</span>(label);  <br>    northLayout-&gt;<span class="hljs-built_in">addWidget</span>(editor);  <br>    southLayout-&gt;<span class="hljs-built_in">addWidget</span>(copyButton);  <br>    southLayout-&gt;<span class="hljs-built_in">addWidget</span>(pasteButton);  <br>    mainLayout-&gt;<span class="hljs-built_in">addLayout</span>(northLayout);  <br>    mainLayout-&gt;<span class="hljs-built_in">addLayout</span>(southLayout);  <br><br>    <span class="hljs-built_in">connect</span>(copyButton, <span class="hljs-built_in">SIGNAL</span>(<span class="hljs-built_in">clicked</span>()), <span class="hljs-keyword">this</span>, <span class="hljs-built_in">SLOT</span>(<span class="hljs-built_in">setClipboard</span>()));  <br>    <span class="hljs-built_in">connect</span>(pasteButton, <span class="hljs-built_in">SIGNAL</span>(<span class="hljs-built_in">clicked</span>()), <span class="hljs-keyword">this</span>, <span class="hljs-built_in">SLOT</span>(<span class="hljs-built_in">getClipboard</span>()));  <br>&#125;  <br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ClipboardDemo::setClipboard</span><span class="hljs-params">()</span>  </span><br><span class="hljs-function"></span>&#123;  <br>    QClipboard *board = QApplication::<span class="hljs-built_in">clipboard</span>();  <br>    board-&gt;<span class="hljs-built_in">setText</span>(<span class="hljs-string">&quot;Text from Qt Application&quot;</span>);  <br>&#125;  <br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ClipboardDemo::getClipboard</span><span class="hljs-params">()</span>  </span><br><span class="hljs-function"></span>&#123;  <br>    QClipboard *board = QApplication::<span class="hljs-built_in">clipboard</span>();  <br>    QString str = board-&gt;<span class="hljs-built_in">text</span>();  <br>    QMessageBox::<span class="hljs-built_in">information</span>(<span class="hljs-literal">NULL</span>, <span class="hljs-string">&quot;From clipboard&quot;</span>, str);  <br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -317,7 +290,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/git/">#git</a>
+        <a href="/tags/QT-CPP/">#QT CPP</a>
       
     </div>
   
@@ -329,8 +302,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Git实际开发场景</div>
-      <div>https://macbook-pro-gala.github.io/2023/04/22/Git实际开发场景/</div>
+      <div>QT-剪贴板操作</div>
+      <div>https://macbook-pro-gala.github.io/2023/04/22/QT-剪贴板操作/</div>
     </div>
     <div class="license-meta">
       
@@ -374,9 +347,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/22/QT-%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%93%8D%E4%BD%9C/" title="QT-剪贴板操作">
+                      <a href="/2023/04/22/QT-%E8%AF%BB%E5%86%99ini%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" title="QT-读写ini配置文件">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">QT-剪贴板操作</span>
+                        <span class="hidden-mobile">QT-读写ini配置文件</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -384,8 +357,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/22/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2023/04/22/Git%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E5%9C%BA%E6%99%AF/" title="Git实际开发场景">
+                        <span class="hidden-mobile">Git实际开发场景</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
