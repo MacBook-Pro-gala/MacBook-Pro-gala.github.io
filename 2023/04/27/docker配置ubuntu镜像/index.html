@@ -16,23 +16,22 @@
   <meta name="author" content="lyh">
   <meta name="keywords" content="">
   
-    <meta name="description" content="leveldb简介 LevelDb是能够处理十亿级别规模Key-Value型数据持久性存储的嵌入式数据库，内部没有设计成C&#x2F;S网络结构，必须和服务部署在同一台服务器。levelDB其实也是一个C++程序库，是可以可以被编译和链接到我们自己的程序中的库，而不是像Redis那样是一个数据库服务器。LevelDb本质上是一个存储引擎，即一套存储系统以及在这套存储系统上提供的一些操作接口。LevelDb有">
+    <meta name="description" content="进入ubuntu12docker exec -it Ubuntu-vscode &#x2F;bin&#x2F;zshdocker exec -it ubuntuvolumes &#x2F;bin&#x2F;zsh  windows挂载本地路径到容器1docker run -it -d --name ubuntuvolumes -v E:&#x2F;&#x2F;vsproject:&#x2F;home&#x2F;vsproject ubuntu &#x2F;bin&#x2F;bash    配置过">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leveldb入门">
-<meta property="og:url" content="https://macbook-pro-gala.github.io/2023/04/22/leveldb%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:title" content="docker配置ubuntu镜像">
+<meta property="og:url" content="https://macbook-pro-gala.github.io/2023/04/27/docker%E9%85%8D%E7%BD%AEubuntu%E9%95%9C%E5%83%8F/index.html">
 <meta property="og:site_name" content="Mr.0b110的个人博客">
-<meta property="og:description" content="leveldb简介 LevelDb是能够处理十亿级别规模Key-Value型数据持久性存储的嵌入式数据库，内部没有设计成C&#x2F;S网络结构，必须和服务部署在同一台服务器。levelDB其实也是一个C++程序库，是可以可以被编译和链接到我们自己的程序中的库，而不是像Redis那样是一个数据库服务器。LevelDb本质上是一个存储引擎，即一套存储系统以及在这套存储系统上提供的一些操作接口。LevelDb有">
+<meta property="og:description" content="进入ubuntu12docker exec -it Ubuntu-vscode &#x2F;bin&#x2F;zshdocker exec -it ubuntuvolumes &#x2F;bin&#x2F;zsh  windows挂载本地路径到容器1docker run -it -d --name ubuntuvolumes -v E:&#x2F;&#x2F;vsproject:&#x2F;home&#x2F;vsproject ubuntu &#x2F;bin&#x2F;bash    配置过">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-22T06:53:15.000Z">
-<meta property="article:modified_time" content="2023-04-22T06:53:56.136Z">
+<meta property="article:published_time" content="2023-04-27T02:17:41.000Z">
+<meta property="article:modified_time" content="2023-04-27T02:18:02.353Z">
 <meta property="article:author" content="lyh">
-<meta property="article:tag" content="leveldb">
-<meta property="article:tag" content="Database">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>leveldb入门 - Mr.0b110的个人博客</title>
+  <title>docker配置ubuntu镜像 - Mr.0b110的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="leveldb入门"></span>
+            <span id="subtitle" data-typed-text="docker配置ubuntu镜像"></span>
           
         </div>
 
@@ -209,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-22 14:53" pubdate>
-          2023年4月22日 下午
+        <time datetime="2023-04-27 10:17" pubdate>
+          2023年4月27日 上午
         </time>
       </span>
     
@@ -232,7 +231,7 @@
         
         
         
-          25 分钟
+          26 分钟
         
       </span>
     
@@ -270,49 +269,27 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">leveldb入门</h1>
+            <h1 style="display: none">docker配置ubuntu镜像</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="leveldb简介"><a href="#leveldb简介" class="headerlink" title="leveldb简介"></a>leveldb简介</h1><pre><code class="hljs"> LevelDb是能够处理十亿级别规模Key-Value型数据持久性存储的嵌入式数据库，内部没有设计成C/S网络结构，必须和服务部署在同一台服务器。levelDB其实也是一个C++程序库，是可以可以被编译和链接到我们自己的程序中的库，而不是像Redis那样是一个数据库服务器。LevelDb本质上是一个存储引擎，即一套存储系统以及在这套存储系统上提供的一些操作接口。LevelDb有如下一些特点：
-</code></pre>
-<ul>
-<li>首先，LevelDb是一个持久化存储的KV系统，和Redis这种内存型的KV系统不同，redis是一个内存数据库，它是将KV写入内存中，而LevelDb不会像Redis一样狂吃内存，而是将大部分数据存储到磁盘上。从某种意义上说，redis是非持久化的，而levelDB是实时持久化的。</li>
-<li>key、value支持任意的byte类型数组，不单单支持字符串</li>
-<li>其次，LevelDb在存储数据时，是根据记录的key值有序存储的，就是说相邻的key值在存储文件中是依次顺序存储的，而应用可以自定义key大小比较函数，LevleDb会按照用户定义的比较函数依序存储这些记录。</li>
-<li>再次，像大多数KV系统一样，LevelDb的操作接口很简单，基本操作包括写记录，读记录以及删除记录。也支持针对多条操作的原子批量操作。</li>
-<li>另外，LevelDb支持数据快照（snapshot）功能，使得读取操作不受写操作影响，可以在读操作过程中始终看到一致的数据。</li>
-<li>除此外，LevelDb还支持数据压缩等操作，这对于减小存储空间以及增快IO效率都有直接的帮助。</li>
-<li>LSM典型实现，适合写多读少。</li>
-</ul>
-<h1 id="编译-amp-安装"><a href="#编译-amp-安装" class="headerlink" title="编译&amp;安装"></a>编译&amp;安装</h1><ul>
-<li>源码下载</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">git clone https://github.com/google/leveldb.git<br>git submodule update --init		<br></code></pre></td></tr></table></figure>
+                <h2 id="进入ubuntu"><a href="#进入ubuntu" class="headerlink" title="进入ubuntu"></a>进入ubuntu</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker exec -it Ubuntu-vscode <span class="hljs-regexp">/bin/</span>zsh<br>docker exec -it ubuntuvolumes <span class="hljs-regexp">/bin/</span>zsh<br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>执行编译</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd leveldb<br>mkdir -p build &amp;&amp; cd build <br>cmake -DCMAKE_BUILD_TYPE=Release .. &amp;&amp; cmake --build .<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>头文件加入系统目录(可选)</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -r ./include/leveldb /usr/include/<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>编写demo</li>
-<li>编译demo</li>
-</ul>
-<p>g++ -o xxx xxx.cpp libleveldb.a -lpthread</p>
-<p>测试程序如下</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cassert&gt;</span></span><br> <br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;leveldb/db.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;leveldb/write_batch.h&quot;</span></span><br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// Open a database.</span><br>    leveldb::DB* db;<br>    leveldb::Options opts;<br>    opts.create_if_missing = <span class="hljs-literal">true</span>;<br>    leveldb::Status status = leveldb::DB::<span class="hljs-built_in">Open</span>(opts, <span class="hljs-string">&quot;./testdb&quot;</span>, &amp;db);<br>    <span class="hljs-built_in">assert</span>(status.<span class="hljs-built_in">ok</span>());<br>    <br>    <span class="hljs-comment">// Write data.</span><br>    status = db-&gt;<span class="hljs-built_in">Put</span>(leveldb::<span class="hljs-built_in">WriteOptions</span>(), <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;jinhelin&quot;</span>);<br>    <span class="hljs-built_in">assert</span>(status.<span class="hljs-built_in">ok</span>());<br> <br>    <span class="hljs-comment">// Read data.</span><br>    std::string val;<br>    status = db-&gt;<span class="hljs-built_in">Get</span>(leveldb::<span class="hljs-built_in">ReadOptions</span>(), <span class="hljs-string">&quot;name&quot;</span>, &amp;val);<br>    <span class="hljs-built_in">assert</span>(status.<span class="hljs-built_in">ok</span>());<br>    std::cout &lt;&lt; val &lt;&lt; std::endl;<br> <br>    <span class="hljs-comment">// Batch atomic write.</span><br>    leveldb::WriteBatch batch;<br>    batch.<span class="hljs-built_in">Delete</span>(<span class="hljs-string">&quot;name&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name0&quot;</span>, <span class="hljs-string">&quot;jinhelin0&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name1&quot;</span>, <span class="hljs-string">&quot;jinhelin1&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name2&quot;</span>, <span class="hljs-string">&quot;jinhelin2&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name3&quot;</span>, <span class="hljs-string">&quot;jinhelin3&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name4&quot;</span>, <span class="hljs-string">&quot;jinhelin4&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name5&quot;</span>, <span class="hljs-string">&quot;jinhelin5&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name6&quot;</span>, <span class="hljs-string">&quot;jinhelin6&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name7&quot;</span>, <span class="hljs-string">&quot;jinhelin7&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name8&quot;</span>, <span class="hljs-string">&quot;jinhelin8&quot;</span>);<br>    batch.<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;name9&quot;</span>, <span class="hljs-string">&quot;jinhelin9&quot;</span>);<br>    status = db-&gt;<span class="hljs-built_in">Write</span>(leveldb::<span class="hljs-built_in">WriteOptions</span>(), &amp;batch);<br>    <span class="hljs-built_in">assert</span>(status.<span class="hljs-built_in">ok</span>());<br> <br>    <span class="hljs-comment">// Scan database.</span><br>    leveldb::Iterator* it = db-&gt;<span class="hljs-built_in">NewIterator</span>(leveldb::<span class="hljs-built_in">ReadOptions</span>());<br>    <span class="hljs-keyword">for</span> (it-&gt;<span class="hljs-built_in">SeekToFirst</span>(); it-&gt;<span class="hljs-built_in">Valid</span>(); it-&gt;<span class="hljs-built_in">Next</span>()) &#123;<br>        std::cout &lt;&lt; it-&gt;<span class="hljs-built_in">key</span>().<span class="hljs-built_in">ToString</span>() &lt;&lt; <span class="hljs-string">&quot;: &quot;</span> &lt;&lt; <br>          it-&gt;<span class="hljs-built_in">value</span>().<span class="hljs-built_in">ToString</span>() &lt;&lt; std::endl;<br>    &#125;<br>    <span class="hljs-built_in">assert</span>(it-&gt;<span class="hljs-built_in">status</span>().<span class="hljs-built_in">ok</span>());<br>    <br>    <span class="hljs-comment">// Range scan, example: [name3, name8)</span><br>    <span class="hljs-keyword">for</span> (it-&gt;<span class="hljs-built_in">Seek</span>(<span class="hljs-string">&quot;name3&quot;</span>); <br>         it-&gt;<span class="hljs-built_in">Valid</span>() &amp;&amp; it-&gt;<span class="hljs-built_in">key</span>().<span class="hljs-built_in">ToString</span>() &lt; <span class="hljs-string">&quot;name8&quot;</span>; <br>         it-&gt;<span class="hljs-built_in">Next</span>()) &#123;<br>        std::cout &lt;&lt; it-&gt;<span class="hljs-built_in">key</span>().<span class="hljs-built_in">ToString</span>() &lt;&lt; <span class="hljs-string">&quot;: &quot;</span> &lt;&lt; <br>          it-&gt;<span class="hljs-built_in">value</span>().<span class="hljs-built_in">ToString</span>() &lt;&lt; std::endl;<br>    &#125; <br> <br>    <span class="hljs-comment">// Close a database.</span><br>    <span class="hljs-keyword">delete</span> db;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="windows挂载本地路径到容器"><a href="#windows挂载本地路径到容器" class="headerlink" title="windows挂载本地路径到容器"></a>windows挂载本地路径到容器</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker run -it -d --name ubuntuvolumes -v E:<span class="hljs-regexp">//</span>vsproject:<span class="hljs-regexp">/home/</span>vsproject ubuntu <span class="hljs-regexp">/bin/</span>bash<br></code></pre></td></tr></table></figure>
 
 
 
-<h1 id="教程网站"><a href="#教程网站" class="headerlink" title="教程网站"></a>教程网站</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/80684560">leveldb源码阅读系列 - 知乎 (zhihu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/560749237">到处抄来的LevelDB笔记 - 知乎 (zhihu.com)</a></p>
+<h2 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker --version<br>docker-compose --version<br>docker pull ubuntu  # 获取 ubuntu 镜像<br>docker image ls  # 查看当前安装的Docker镜像<br> <br>docker run -i -t --name ubuntuTest ubuntu bash  # 创建并运行一个可以使用终端交互的 ubuntu 容器<br>cat /etc/issue  # 查看ubuntu系统版本<br>control d  # 退出容器<br> <br>docker ps  # 查看当前运行的容器<br>docker ps -a  # 列出所有容器信息，包括已经关闭的。<br>docker start -i ubuntuTest  # -i启动容器，可以进入终端交互。<br> <br>apt-get update  # 更新软件源信息<br>apt-get install vim  # 安装 vim<br>apt-get install git python3  # 安装 git 和 python3<br> <br>vim /etc/apt/sources.list  # 更新软件源<br>deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse<br>deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse<br>deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse<br>deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse<br>deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse<br>deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse<br>deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse<br>deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse<br>deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse<br>deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse  <br> <br>apt-get install openssh-server  # 安装 openssh-server,用于开启 ssh 服务供外部连接。<br><span class="hljs-meta prompt_"># </span><span class="language-bash">安装中途选择的 6-Asia   70-shanghai</span><br> <br>vim /etc/ssh/sshd_config  # 更改 sshd 的默认配置 去掉下面3处的注释符#<br>34行，PermitRootLogin prohibit-password<br>39行，PubkeyAuthentication yes<br>42行，AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2<br> <br>/etc/init.d/ssh restart  # 重启sshd<br>mkdir ~/.ssh<br>touch ~/.ssh/authorized_keys<br><span class="hljs-meta prompt_"># </span><span class="language-bash">在本机mac终端，<span class="hljs-built_in">cat</span> ~/.ssh/id_rsa.pub  如果没有该文件，终端输入ssh-keygen，连续回车enter，即生成该文件；</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">将本机id_rsa.pub的一行内容，vim复制到docker容器的 ~/.ssh/authorized_keys中</span><br>control d<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">以上完成了ubuntu的基本配置+ssh支持；  以下生成新的镜像版本</span><br>docker commit -m &#x27;add ssh&#x27; -a &#x27;fxd1991&#x27; d4b0fc9b1e81 ubuntu-ssh<br><span class="hljs-meta prompt_"># </span><span class="language-bash">-m，指定提交信息; -a，指定提交者; d4b0fc9b1e81是CONTAINER ID; ubuntu-ssh 是新镜像的名称</span><br> <br>docker rm ubuntuTest<br> <br>docker run -d -p 22222:22 --name ubuntuTest ubuntu-ssh /usr/sbin/sshd -D<br><span class="hljs-meta prompt_"># </span><span class="language-bash">-d 后台运行; -p 绑定宿主机的22222端口到ubuntu容器的22端口; --name 给容器取名为ubuntuTest;</span> <br><span class="hljs-meta prompt_"># </span><span class="language-bash">ubuntu-ssh 使用镜像ubuntu-ssh创建容器; /usr/sbin/sshd -D 指定容器启动使用的应用及参数;</span><br>ssh -p 22222 root@localhost  # 不输密码，直接进入容器ubuntuTest；<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">在本机 macOS，vim ~/.ssh/config，添加如下内容：</span><br>Host ubuntuTest<br>    HostName localhost<br>    User     root<br>    Port     22222<br><span class="hljs-meta prompt_"># </span><span class="language-bash">然后可以 ssh ubuntuTest 连接容器。</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="进入容器的zsh"><a href="#进入容器的zsh" class="headerlink" title="进入容器的zsh"></a>进入容器的zsh</h2><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">docker exec -it <span class="hljs-number">0</span>a<span class="hljs-number">7e10</span>f<span class="hljs-number">27028</span><span class="hljs-keyword">c</span><span class="hljs-number">5</span>bf<span class="hljs-number">03</span>acaacafa<span class="hljs-number">539e381</span>d<span class="hljs-number">476</span>f<span class="hljs-number">0</span><span class="hljs-keyword">c</span><span class="hljs-number">0</span>f<span class="hljs-number">57815054988526</span>f<span class="hljs-number">7</span><span class="hljs-keyword">c</span><span class="hljs-number">76</span>bfb /bin/zsh<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Docker-Engine配置"><a href="#Docker-Engine配置" class="headerlink" title="Docker Engine配置"></a>Docker Engine配置</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;builder&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;gc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;defaultKeepStorage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;20GB&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;experimental&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;features&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;buildkit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;http://hub-mirror.c.163.com&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><br>  <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -325,9 +302,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/leveldb/">#leveldb</a>
-      
-        <a href="/tags/Database/">#Database</a>
+        <a href="/tags/docker/">#docker</a>
       
     </div>
   
@@ -339,8 +314,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>leveldb入门</div>
-      <div>https://macbook-pro-gala.github.io/2023/04/22/leveldb入门/</div>
+      <div>docker配置ubuntu镜像</div>
+      <div>https://macbook-pro-gala.github.io/2023/04/27/docker配置ubuntu镜像/</div>
     </div>
     <div class="license-meta">
       
@@ -352,7 +327,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月22日</div>
+          <div>2023年4月27日</div>
         </div>
       
       
@@ -384,9 +359,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/27/docker%E9%85%8D%E7%BD%AEubuntu%E9%95%9C%E5%83%8F/" title="docker配置ubuntu镜像">
+                      <a href="/2023/04/27/docker%E5%9F%BA%E7%A1%80/" title="docker基础">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">docker配置ubuntu镜像</span>
+                        <span class="hidden-mobile">docker基础</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -394,8 +369,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/22/QT-%E8%AF%BB%E5%86%99ini%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" title="QT-读写ini配置文件">
-                        <span class="hidden-mobile">QT-读写ini配置文件</span>
+                      <a href="/2023/04/22/leveldb%E5%85%A5%E9%97%A8/" title="leveldb入门">
+                        <span class="hidden-mobile">leveldb入门</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
