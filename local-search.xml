@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>hiredis的封装类</title>
+    <link href="/2023/04/29/hiredis%E7%9A%84%E5%B0%81%E8%A3%85%E7%B1%BB/"/>
+    <url>/2023/04/29/hiredis%E7%9A%84%E5%B0%81%E8%A3%85%E7%B1%BB/</url>
+    
+    <content type="html"><![CDATA[<p>#ifndef CAUTOREDISREPLY_H<br>#define CAUTOREDISREPLY_H</p><p>#include “hiredis.h”<br>#include &lt;stdlib.h&gt;<br>#include <string><br>#include &lt;stdio.h&gt;<br>#include &lt;strings.h&gt;<br>#include &lt;assert.h&gt;<br>#include <vector><br>#include &lt;stdint.h&gt;<br>#include <sstream><br>#include <set></p><p>using namespace std;</p><p>enum enRedisResult<br>{<br>    REDIS_SUCCESS,&#x2F;&#x2F; 成功<br>    REDIS_FAILED,&#x2F;&#x2F; 失败<br>};</p><p>&#x2F;&#x2F; 用结构体包装一下，避免使用者忘记回收reply<br>class CAutoRedisReply<br>{<br>public:<br>    CAutoRedisReply(redisReply* r &#x3D; NULL);<br>    ~CAutoRedisReply();<br>public:<br>    void set(redisReply* r);<br>    redisReply* get();<br>private:<br>    redisReply* m_r;<br>};</p><p>class CRedisClient<br>{<br>public:<br>    CRedisClient() : m_bConnected(false), m_redisCtx(NULL)<br>    {<br>    }</p><pre><code class="hljs">virtual ~CRedisClient()&#123;    clear();&#125;</code></pre><p>public:<br>    &#x2F;&#x2F; 初始化<br>    bool Init(string IP, int port, string password, int timeout&#x3D;5000);<br>public:<br>    &#x2F;&#x2F; 判断指定key是否存在<br>    bool Exist(string key);</p><pre><code class="hljs">// 设置指定key的值,过期时间单位：秒int Set(string key, string val, uint32_t expire);// 获取指定key的值，字符串类型string Get(string key);// 设置指定key的值,bin类型// pVal:内存地址// len：内存大小// expire：过期时间，单位：秒int Set(string key, const char* pVal, int length, uint32_t expire);// 获取指定key的值,bin类型int Get(string key, CAutoRedisReply&amp; reply);// 设置过期时间，不对外提供的原因是强制要求set key的同时必须设置过期时间int  expireKey(string key, uint32_t expire);</code></pre><p>private:<br>    &#x2F;&#x2F; 连接<br>    bool connect();</p><pre><code class="hljs">void clear();// 设置过期时间，不对外提供的原因是强制要求set key的同时必须设置过期时间</code></pre><p>&#x2F;&#x2F;    int  expireKey(string key, uint32_t expire);<br>private:<br>    boolm_bConnected;&#x2F;&#x2F; 是否已连接成功<br>    redisContext*m_redisCtx;&#x2F;&#x2F; redisl连接<br>    stringm_szIp;&#x2F;&#x2F; redis服务器IP<br>    intm_nPort;&#x2F;&#x2F; redis服务器端口<br>    string     m_password;&#x2F;&#x2F; redis密码<br>    uint32_tm_timeout;&#x2F;&#x2F; 超时时间，单位：毫秒<br>};</p><p>#endif &#x2F;&#x2F; CAUTOREDISREPLY_H</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>QT</tag>
+      
+      <tag>Database</tag>
+      
+      <tag>Redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>docker基础</title>
     <link href="/2023/04/27/docker%E5%9F%BA%E7%A1%80/"/>
     <url>/2023/04/27/docker%E5%9F%BA%E7%A1%80/</url>
