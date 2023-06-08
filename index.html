@@ -241,6 +241,90 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/06/08/muduo%E5%BA%93Buffer%E8%AF%A6%E8%A7%A3/" target="_self">
+          muduo库Buffer详解
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/08/muduo%E5%BA%93Buffer%E8%AF%A6%E8%A7%A3/" target="_self">
+        <div>
+          为什么要有BufferTcpconnection必须要有outputbuffer：想像一个场景：应用程序想向TCP连接发送100k数据，但是在write系统调用中，操作系统只接受80k数据。为了避免阻塞，我们肯定不想在这里阻塞。因为不知道要等多久。程序应该尽快交出控制权，返回eventloop，此时，剩下的20k数据怎么办？ 对于应用程序而言，它只管生成数据，不应该关心到底数据是一次性发送还是分成
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-08 10:30" pubdate>
+              2023-06-08
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CPP/">#CPP</a>
+            
+              <a href="/tags/muduo/">#muduo</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/06/08/muduo%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          muduo库的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/08/muduo%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+        <div>
+          准备使用muduo的好处就是能分离网络I&#x2F;O代码与业务代码 依赖1libmuduo_base.so  libmuduo_net.so libpthread.so  muduo网络库提供了两个主要的类：TcpServer（编写服务端程序）、TcpClient（编写客户端程序） 基于muduo开发服务器程序 首先要组合TcpServer对象，即在类中声明私有对象 创建事件循环的指针  123
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-08 10:27" pubdate>
+              2023-06-08
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CPP/">#CPP</a>
+            
+              <a href="/tags/muduo/">#muduo</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/06/08/c-%E5%AE%9E%E7%8E%B0%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" target="_self">
           c++实现回调函数
         </a>
@@ -591,40 +675,13 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/22/hello-world/" target="_self">
-          Hello World
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/22/hello-world/" target="_self">
-        <div>
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-22 10:29" pubdate>
-              2023-04-22
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
 
 
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
 
 
 

@@ -16,15 +16,15 @@
   <meta name="author" content="lyh">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CPP实现回调函数得到函数的地址是其中一个关键步骤。普通和函数和类的静态成员函数都分配有确定的函数地址，但是类的普通函数是类共用的，并不会给类的每一个实例都分配一个独立的成员函数，这样就太浪费存储资源了。所以类的非静态函数作为回调函数是有区别的 普通函数作为回调函数12345678910111213141516#include &lt;iostream&gt;void programA_FunA1">
+    <meta name="description" content="为什么要有BufferTcpconnection必须要有outputbuffer：想像一个场景：应用程序想向TCP连接发送100k数据，但是在write系统调用中，操作系统只接受80k数据。为了避免阻塞，我们肯定不想在这里阻塞。因为不知道要等多久。程序应该尽快交出控制权，返回eventloop，此时，剩下的20k数据怎么办？ 对于应用程序而言，它只管生成数据，不应该关心到底数据是一次性发送还是分成">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c++实现回调函数">
-<meta property="og:url" content="https://macbook-pro-gala.github.io/2023/06/08/c-%E5%AE%9E%E7%8E%B0%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="muduo库Buffer详解">
+<meta property="og:url" content="https://macbook-pro-gala.github.io/2023/06/08/muduo%E5%BA%93Buffer%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Mr.0b110的个人博客">
-<meta property="og:description" content="CPP实现回调函数得到函数的地址是其中一个关键步骤。普通和函数和类的静态成员函数都分配有确定的函数地址，但是类的普通函数是类共用的，并不会给类的每一个实例都分配一个独立的成员函数，这样就太浪费存储资源了。所以类的非静态函数作为回调函数是有区别的 普通函数作为回调函数12345678910111213141516#include &lt;iostream&gt;void programA_FunA1">
+<meta property="og:description" content="为什么要有BufferTcpconnection必须要有outputbuffer：想像一个场景：应用程序想向TCP连接发送100k数据，但是在write系统调用中，操作系统只接受80k数据。为了避免阻塞，我们肯定不想在这里阻塞。因为不知道要等多久。程序应该尽快交出控制权，返回eventloop，此时，剩下的20k数据怎么办？ 对于应用程序而言，它只管生成数据，不应该关心到底数据是一次性发送还是分成">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-08T02:22:54.000Z">
-<meta property="article:modified_time" content="2023-06-08T02:24:38.403Z">
+<meta property="article:published_time" content="2023-06-08T02:30:30.000Z">
+<meta property="article:modified_time" content="2023-06-08T02:31:00.398Z">
 <meta property="article:author" content="lyh">
 <meta property="article:tag" content="CPP">
 <meta property="article:tag" content="muduo">
@@ -34,7 +34,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>c++实现回调函数 - Mr.0b110的个人博客</title>
+  <title>muduo库Buffer详解 - Mr.0b110的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -215,7 +215,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="c++实现回调函数"></span>
+            <span id="subtitle" data-typed-text="muduo库Buffer详解"></span>
           
         </div>
 
@@ -226,7 +226,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-08 10:22" pubdate>
+        <time datetime="2023-06-08 10:30" pubdate>
           2023年6月8日 上午
         </time>
       </span>
@@ -238,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          2.5k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
         
-          26 分钟
+          22 分钟
         
       </span>
     
@@ -295,26 +295,37 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">c++实现回调函数</h1>
+            <h1 style="display: none">muduo库Buffer详解</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="CPP实现回调函数"><a href="#CPP实现回调函数" class="headerlink" title="CPP实现回调函数"></a>CPP实现回调函数</h2><p>得到函数的地址是其中一个关键步骤。<br>普通和函数和类的静态成员函数都分配有确定的函数地址，但是类的普通函数是类共用的，并不会给类的每一个实例都分配一个独立的成员函数，这样就太浪费存储资源了。所以类的非静态函数作为回调函数是有区别的</p>
-<h3 id="普通函数作为回调函数"><a href="#普通函数作为回调函数" class="headerlink" title="普通函数作为回调函数"></a>普通函数作为回调函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">programA_FunA1</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA_FunA1 and be called..\n&quot;</span>); &#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">programA_FunA2</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA_FunA2 and be called..\n&quot;</span>); &#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">programB_FunB1</span><span class="hljs-params">(<span class="hljs-type">void</span> (*callback)())</span> </span>&#123;<br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am programB_FunB1 and be called..\n&quot;</span>);<br>  <span class="hljs-built_in">callback</span>();<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span> </span>&#123;<br>  <span class="hljs-built_in">programA_FunA1</span>();<br><br>  <span class="hljs-built_in">programB_FunB1</span>(programA_FunA2);<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="为什么要有Buffer"><a href="#为什么要有Buffer" class="headerlink" title="为什么要有Buffer"></a>为什么要有Buffer</h1><h2 id="Tcpconnection必须要有outputbuffer："><a href="#Tcpconnection必须要有outputbuffer：" class="headerlink" title="Tcpconnection必须要有outputbuffer："></a>Tcpconnection必须要有outputbuffer：</h2><p>想像一个场景：应用程序想向TCP连接发送100k数据，但是在write系统调用中，操作系统只接受80k数据。为了避免阻塞，我们肯定不想在这里阻塞。因为不知道要等多久。程序应该尽快交出控制权，返回eventloop，此时，剩下的20k数据怎么办？</p>
+<p>对于应用程序而言，它只管生成数据，不应该关心到底数据是一次性发送还是分成多次发送。这些问题应该由网络库关心。应用程序只需要直接调用Tcpconnection::send()就可以，网络库负责接管剩下的20k数据，把它保存在TcpConnection的buffer中，然后注册POLLOUT事件，一旦POLLOUT事件发生就可以直接将剩下的数据发送出去。当然，第二次调用也不能确定可以写完20k数据。如果还有剩余数据，网络库继续关注POLLOUT事件。如果buffer中已经没有数据可发送了，则取消对POLLOUT事件的关注，避免造成busy loop。</p>
+<p>如果程序又写入50k数据，而这时候Tcpconnection缓冲区中还有20k数据等待发送，那么网络库不应该直接调用write，而应该把这50k的数据append到原来的20k数据之后，等socke可写时再一起写入。</p>
+<p>如果outbuffer中还有待发送的数据，而程序又想关闭连接，那么这时候网络库不能立即关闭，而要等待缓冲区数据发送完毕再关闭。</p>
+<p>综上，要让程序在write操作上不阻塞，网络库必须要给每个tcp connection配置output buffer。</p>
+<h2 id="TcpConnection必须要有input-buffer"><a href="#TcpConnection必须要有input-buffer" class="headerlink" title="TcpConnection必须要有input buffer"></a>TcpConnection必须要有input buffer</h2><p>Tcp是一个无边界的字节流协议。接收方必须处理收到的数据尚不构成一条完整的消息和一次收到两条消息的数据等情况。而且网络库在读取socket可读事件时，必须一次性把socket里的数据读完。否则会反复出发POLLIN事件，因为我们的epoll loop采用的是epoll level triger。</p>
+<p>为了应对TCP字节流协议带来的数据接受的不完整性，收到的数据必须先放到input buffer中，等构成一条完整的消息再通知程序的业务逻辑。</p>
+<p>所以在Tcp Connection中必须要给每个tcp connection设置input buffer。</p>
+<blockquote>
+<p>所有muduo中的IO都是带缓冲的。你不会自己去调用read或者write函数，只会操作tcpConnection的input buffer和output buffer。更确切地说，是在onMessage回调里读取input buffer；调用TcpConnection::send来间接操作output buffer。一般不会直接操作output buffer。</p>
+</blockquote>
+<h1 id="Buffer的结构"><a href="#Buffer的结构" class="headerlink" title="Buffer的结构"></a>Buffer的结构</h1><p>Buffer的数据成员如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">private</span>:<br> std::vector&lt;<span class="hljs-type">char</span>&gt; buffer_;<br> <span class="hljs-type">size_t</span> readerIndex_;<br> <span class="hljs-type">size_t</span> writerIndex_;<br></code></pre></td></tr></table></figure>
 
-<h3 id="类的静态函数作为回调函数"><a href="#类的静态函数作为回调函数" class="headerlink" title="类的静态函数作为回调函数"></a>类的静态函数作为回调函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ProgramA</span> &#123;<br> <span class="hljs-keyword">public</span>:<br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FunA1</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA.FunA1() and be called..\n&quot;</span>); &#125;<br><br>  <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">FunA2</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA.FunA2() and be called..\n&quot;</span>); &#125;<br>&#125;;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ProgramB</span> &#123;<br> <span class="hljs-keyword">public</span>:<br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FunB1</span><span class="hljs-params">(<span class="hljs-type">void</span> (*callback)())</span> </span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramB.FunB1() and be called..\n&quot;</span>);<br>    <span class="hljs-built_in">callback</span>();<br>  &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span> </span>&#123;<br>  ProgramA PA;<br>  PA.<span class="hljs-built_in">FunA1</span>();<br><br>  ProgramB PB;<br>  PB.<span class="hljs-built_in">FunB1</span>(ProgramA::FunA2);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>buffer_是存放数据的vector容器，它是可以自动增长的。readerindex_和writeIindex_主要标识了Buffer中数据的分布情况</p>
+<p>两个index把vector分成三个部分：prependable，readable，writable<br>readable表示缓存中等待发送的数据所在位置，writable表示缓存中空闲的位置，可往里面写新的数据。predendable是一个固定大小的区域，我们可以通过往这个区域添加数据来为待发送的数据添加额外信息头。<br>muduo buffer里面有两个常量：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">static</span> <span class="hljs-type">const</span> <span class="hljs-type">size_t</span> kCheapPrepend = <span class="hljs-number">8</span>;<br><span class="hljs-type">static</span> <span class="hljs-type">const</span> <span class="hljs-type">size_t</span> kInitialSize = <span class="hljs-number">1024</span>;<br></code></pre></td></tr></table></figure>
 
-<p>可以看出，以上两种方式没有什么本质的区别。<br>但这种实现有一个很明显的缺点：static 函数不能访问非static 成员变量或函数，会严重限制回调函数可以实现的功能。</p>
-<h3 id="类的非静态函数作为回调函数"><a href="#类的非静态函数作为回调函数" class="headerlink" title="类的非静态函数作为回调函数"></a>类的非静态函数作为回调函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ProgramA</span> &#123;<br> <span class="hljs-keyword">public</span>:<br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FunA1</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA.FunA1() and be called..\n&quot;</span>); &#125;<br><br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FunA2</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA.FunA2() and be called..\n&quot;</span>); &#125;<br>&#125;;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ProgramB</span> &#123;<br> <span class="hljs-keyword">public</span>:<br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FunB1</span><span class="hljs-params">(<span class="hljs-type">void</span> (ProgramA::*callback)(), <span class="hljs-type">void</span> *context)</span> </span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramB.FunB1() and be called..\n&quot;</span>);<br>    ((ProgramA *)context-&gt;*callback)();<br>  &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span> </span>&#123;<br>  ProgramA PA;<br>  PA.<span class="hljs-built_in">FunA1</span>();<br><br>  ProgramB PB;<br>  PB.<span class="hljs-built_in">FunB1</span>(&amp;ProgramA::FunA2, &amp;PA);  <span class="hljs-comment">// 此处都要加&amp;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>其中kInitialSize &#x3D; readable + writable；(这是初始状态，要记住Buffer中的buffer_是可变长度的)。</p>
+<p>显然，读时，readIndex右移。因为离readindex越近，则说明这些数据应该越早被发送，因为它们放在Buffer的时间越久。而写时，writeIndex右移，说明是往writable区域添加数据，添加之后readable区域的数据增加，因此writeIndex右移。</p>
+<p>这里读可以理解为TCP连接从Buffer中读取数据，写表示有用户(网络库使用者)向Buffer中写数据。</p>
+<p>从前面对Buffer操作中可以看到，经过若干次读写，prependable区域的数据会变大(因为readindex右移)。此时我们可能需要对buffer_进行调整，不能简单resize它。因为可能前面的predendable区域有很多空间不用，具体的方法是readindex左移，同时相应的数据往左边复制：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">makeSpace</span><span class="hljs-params">(<span class="hljs-type">size_t</span> len)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">writableBytes</span>() + <span class="hljs-built_in">prependableBytes</span>() &lt; len + kCheapPrepend) <span class="hljs-comment">//需要重新分配空间</span><br>  &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> move readable data</span><br>    buffer_.<span class="hljs-built_in">resize</span>(writerIndex_+len);<br>  &#125;<br>  <span class="hljs-keyword">else</span> <span class="hljs-comment">//不需要重新分配空间，只需要调整readindex和writeindex和复制一下相关的数据到左边即可</span><br>  &#123;<br>    <span class="hljs-comment">// move readable data to the front, make space inside buffer</span><br>    <span class="hljs-built_in">assert</span>(kCheapPrepend &lt; readerIndex_);<br>    <span class="hljs-type">size_t</span> readable = <span class="hljs-built_in">readableBytes</span>();<br>    std::<span class="hljs-built_in">copy</span>(<span class="hljs-built_in">begin</span>()+readerIndex_,<br>              <span class="hljs-built_in">begin</span>()+writerIndex_,<br>              <span class="hljs-built_in">begin</span>()+kCheapPrepend);<br>    readerIndex_ = kCheapPrepend;<br>    writerIndex_ = readerIndex_ + readable;<br>    <span class="hljs-built_in">assert</span>(readable == <span class="hljs-built_in">readableBytes</span>());<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>这种方法可以得到预期的结果，看似完美，但是也存在明显不足。<br>比如在programB中FunB1还使用 programA的类型，也就我预先还要知道回调函数所属的类定义，当programB想独立封装时就不好用了。</p>
-<h3 id="std-funtion和std-bind的使用"><a href="#std-funtion和std-bind的使用" class="headerlink" title="std::funtion和std::bind的使用"></a>std::funtion和std::bind的使用</h3><p>C++编译器给每个“非静态的成员函数“增加了一个隐藏的指针参数，让该指针指向当前对象(函数运行时调用该函数的对象)，在函数体中所有成员变量的操作，都是通过该指针去访问。只不过所有的操作对用户是透明的，即用户不需要来传递，编译器自动完成</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;functional&gt;</span> <span class="hljs-comment">// fucntion/bind</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ProgramA</span> &#123;<br> <span class="hljs-keyword">public</span>:<br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FunA1</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA.FunA1() and be called..\n&quot;</span>); &#125;<br><br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FunA2</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA.FunA2() and be called..\n&quot;</span>); &#125;<br><br>  <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">FunA3</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramA.FunA3() and be called..\n&quot;</span>); &#125;<br>&#125;;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ProgramB</span> &#123;<br>  <span class="hljs-keyword">typedef</span> std::function&lt;<span class="hljs-type">void</span> ()&gt; CallbackFun;<br> <span class="hljs-keyword">public</span>:<br>   <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FunB1</span><span class="hljs-params">(CallbackFun callback)</span> </span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am ProgramB.FunB2() and be called..\n&quot;</span>);<br>    <span class="hljs-built_in">callback</span>();<br>  &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">normFun</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;am normFun() and be called..\n&quot;</span>); &#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span> </span>&#123;<br>  ProgramA PA;<br>  PA.<span class="hljs-built_in">FunA1</span>();<br><br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>  ProgramB PB;<br>  PB.<span class="hljs-built_in">FunB1</span>(normFun);<br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>  PB.<span class="hljs-built_in">FunB1</span>(ProgramA::FunA3);<br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>  PB.<span class="hljs-built_in">FunB1</span>(std::<span class="hljs-built_in">bind</span>(&amp;ProgramA::FunA2, &amp;PA));<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>std::funtion支持直接传入函数地址，或者通过std::bind指定。<br>简而言之，std::funtion是定义函数类型(输入、输出)，std::bind是绑定特定的函数（具体的要调用的函数）。</p>
 
                 
               </div>
@@ -341,8 +352,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>c++实现回调函数</div>
-      <div>https://macbook-pro-gala.github.io/2023/06/08/c-实现回调函数/</div>
+      <div>muduo库Buffer详解</div>
+      <div>https://macbook-pro-gala.github.io/2023/06/08/muduo库Buffer详解/</div>
     </div>
     <div class="license-meta">
       
@@ -386,18 +397,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/08/muduo%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" title="muduo库的使用">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">muduo库的使用</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/29/hiredis%E7%9A%84%E5%B0%81%E8%A3%85%E7%B1%BB/" title="hiredis的封装类">
-                        <span class="hidden-mobile">hiredis的封装类</span>
+                      <a href="/2023/06/08/muduo%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" title="muduo库的使用">
+                        <span class="hidden-mobile">muduo库的使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
