@@ -8,7 +8,7 @@
     <link href="/2024/08/19/QT-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/"/>
     <url>/2024/08/19/QT-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/</url>
     
-    <content type="html"><![CDATA[<p><img src="/img/index/1.png"></p><p><img src="/img/index/2.png"></p><p><img src="/img/index/3.png"></p><p><img src="/img/index/4.png"></p><p><img src="/img/index/5.png"></p>]]></content>
+    <content type="html"><![CDATA[<p>简介：由QT实现的客户端，用来完成扫描仪的对接以及图片转换与上传的工作</p><ul><li>通过在模态登录对话框中使用事件过滤器禁用密码框复制粘贴</li><li>使用FTP协议完成图片的上传并使用自定义代理在tableView中展示每个文件的上传进度</li><li>使用线程池分离窗口线程操作与OpenCV图片格式转换从而避免窗口卡顿</li><li>封装OpMysql类与OpRedis类完成对MySQL和Redis的操作，并使用prepare方法避免SQL注入</li></ul><p><img src="/img/index/1.png"></p><p><img src="/img/index/2.png"></p><p><img src="/img/index/3.png"></p><p><img src="/img/index/4.png"></p><p><img src="/img/index/5.png"></p>]]></content>
     
     
     
